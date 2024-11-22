@@ -3,8 +3,11 @@ import { Loader } from "rsuite";
 import AuthContext from "../context";
 import AuthContextProvider from "../context/provider";
 import { ToastContainer } from "react-toastify"
-import Login from "./login";
+import Home from "./home";
+import Dashboard from "./dashboard";
 import Screen404 from "../404";
+import Login from "./login";
+import Register from "./register";
 
 function Router(): JSX.Element {
     return (
@@ -16,7 +19,7 @@ function Router(): JSX.Element {
                             return (
                                 <HashRouter>
                                     <Routes>
-                                        <Route path="/dashboard" element={<Login/>}/>
+                                        <Route path="/dashboard" element={<Dashboard/>}/>
                                     </Routes>
                                     <ToastContainer 
                                         containerId={"globalToast"}
@@ -32,19 +35,20 @@ function Router(): JSX.Element {
                                         limit={1}
                                         theme="light"
                                     />
-                                   
                                 </HashRouter>
                             )
-                        } else if(!authInfo.isAuthenticated){                      
+                        } else if(!authInfo.isAuthenticated){                   
                             return (
                                 <HashRouter>
                                     <Routes>
                                         <Route path="/404" element={<Screen404/>}/>
-                                        <Route path="/" element={<Login/>}/>
+                                        <Route path="/" element={<Home/>}/>
+                                        <Route path="/login" element={<Login/>}/>
+                                        <Route path="/register" element={<Register/>}/>
                                     </Routes>
                                 </HashRouter>
                             )
-                        }else {
+                        } else {
                             return <Loader backdrop size="lg" content={<>NightRide</>} vertical key={"loader-router"}/>
                         }
                     }

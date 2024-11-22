@@ -10,12 +10,15 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
+  if (process.env.REACT_APP_ROBUST_API_BASE_URL === undefined) {
+    throw new Error("REACT_APP_ROBUST_API_BASE_URL is not defined");
+  } 
 
-    const [authInfo, setAuthInfo] = useState<any>({
-        isAuthenticated: false,
-        user: null,
-        hasFetched: false,
-    });
+  const [authInfo, setAuthInfo] = useState<any>({
+      isAuthenticated: false,
+      user: null,
+      hasFetched: false,
+  });
 
   async function signIn(email: string, password: string) {
     const [error, response] = await to(
