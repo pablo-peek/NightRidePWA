@@ -5,7 +5,6 @@ import AuthContextProvider from "../context/provider";
 import { ToastContainer } from "react-toastify"
 import Login from "./login";
 import Screen404 from "../404";
-import Dashboard from "../../sections/dashboard";
 
 function Router(): JSX.Element {
     return (
@@ -17,7 +16,7 @@ function Router(): JSX.Element {
                             return (
                                 <HashRouter>
                                     <Routes>
-                                        <Route path="/dashboard" element={<Dashboard/>}/>
+                                        <Route path="/dashboard" element={<Login/>}/>
                                     </Routes>
                                     <ToastContainer 
                                         containerId={"globalToast"}
