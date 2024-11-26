@@ -9,6 +9,7 @@ import featureTwo from "../../../img/feature_2.png";
 import featureThree from "../../../img/feature_3.png";
 import featureFour from "../../../img/feature_4.png";
 import flutterSection from "../../../img/flutterSection.png";
+import welcome from "../../../img/welcome.png";
 
 function Home(): JSX.Element {
 
@@ -76,7 +77,7 @@ function Home(): JSX.Element {
                     {/* cambiar por foto del garage */}
                     <div className="md:w-1/2 flex justify-center items-center">
                         <img
-                            src={featureOne}
+                            src={welcome}
                             alt="NightRide History"
                             className="mt-24 md:mt-0 md:w-450 rounded-lg shadow-lg"
                         />
