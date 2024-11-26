@@ -8,6 +8,7 @@ import featureOne from "../../../img/feature_1.png";
 import featureTwo from "../../../img/feature_2.png";
 import featureThree from "../../../img/feature_3.png";
 import featureFour from "../../../img/feature_4.png";
+import flutterSection from "../../../img/flutterSection.png";
 
 function Home(): JSX.Element {
 
@@ -25,6 +26,10 @@ function Home(): JSX.Element {
     const downloadAPK = () => {
         // window.open("https://drive.google.com/uc?export=download&id=1g7GzrZl9l9VJ0c3Jv2k0tZuH8r5CJv3N", "_blank");
         console.log("Descargando APK...");
+    }
+
+    const downloadFlutterApp = () => {
+        console.log("Descargando Flutter...");
     }
 
     return (
@@ -99,6 +104,49 @@ function Home(): JSX.Element {
                             Axel descubrirá que las carreras no son solo un juego de velocidad, sino una prueba de carácter,
                             lealtad y determinación.
                         </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* flutter app */}
+            <section 
+                className="flex flex-col md:flex-row items-center min-h-screen px-6 bg-cover text-left bg-center"
+                style={{ backgroundImage: `url(${flutterSection})` }}
+            >
+                <div className="max-w-5xl mx-auto md:w-1/2 p-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-white">
+                        ¡Lleva NightRide contigo donde vayas!
+                    </h2>
+                    <p className="mt-4 text-gray-300">
+                        ¡Prepárate para tener el control total de tus estadísticas y avances en NightRide con nuestra aplicación para móviles! 📱🚗
+                    </p>
+                    <p className="mt-4 text-gray-300">
+                        El app te permite seguir tus logros en tiempo real. Consulta tus tiempos, clasificaciones y estadísticas personales en cualquier momento, estés donde estés.
+                    </p>
+                </div>
+                <div className="mt-12 md:mt-0 md:w-1/2 bg-neutral-800 bg-opacity-35 p-6 rounded-2xl shadow-2xl">
+                    <h3 className="text-2xl font-semibold text-white">Características principales:</h3>
+                    <ul className="mt-4 text-gray-300 space-y-4 text-left">
+                        <li className="flex items-center">
+                            <span className="mr-2 text-yellow-400">📊</span>
+                            Estadísticas detalladas de cada carrera: tiempos, posición, y más.
+                        </li>
+                        <li className="flex items-center">
+                            <span className="mr-2 text-yellow-400">🏁</span>
+                            Clasificaciones en vivo: mantente actualizado sobre tu posición en el ranking de la ciudad.
+                        </li>
+                        <li className="flex items-center">
+                            <span className="mr-2 text-yellow-400">🚦</span>
+                            Notificaciones de eventos y torneos especiales para que no te pierdas de nada.
+                        </li>
+                    </ul>
+                    <div className="mt-8 text-center">
+                        <button
+                            onClick={downloadFlutterApp}
+                            className="px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-green-300"
+                        >
+                            Descargar Aplicación Móvil
+                        </button>
                     </div>
                 </div>
             </section>
