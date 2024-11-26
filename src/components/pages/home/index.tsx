@@ -21,7 +21,7 @@ function Home(): JSX.Element {
     };
 
     const goToYoutube = () => {
-        window.open("https://youtu.be/rvjPxhOfS40?si=2gU-Z-G-F-k3lMDz", "_blank");
+        window.open(process.env.REACT_APP_ROBUST_YOUTUBE_BASE_URL, "_blank");
     };
 
     const downloadAPK = () => {
