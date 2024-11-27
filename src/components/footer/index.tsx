@@ -18,7 +18,7 @@ function Footer() {
               </span>
 
               <a
-                href="#"
+                href="/"
                 className="block text-2xl font-medium text-gray-900 hover:opacity-75 sm:text-3xl dark:text-white"
               >
                 0123456789
@@ -33,7 +33,7 @@ function Footer() {
             <ul className="mt-8 flex gap-6">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -57,7 +57,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -81,7 +81,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -101,7 +101,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -125,7 +125,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   rel="noreferrer"
                   target="_blank"
                   className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
@@ -158,7 +158,7 @@ function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     1on1 Coaching
@@ -167,7 +167,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     Company Review
@@ -176,7 +176,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     Accounts Review
@@ -185,7 +185,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     HR Consulting
@@ -194,7 +194,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     SEO Optimisation
@@ -211,7 +211,7 @@ function Footer() {
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     About
@@ -220,7 +220,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     Meet the Team
@@ -229,7 +229,7 @@ function Footer() {
 
                 <li>
                   <a
-                    href="#"
+                    href="/"
                     className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
                   >
                     Accounts Review
@@ -245,7 +245,7 @@ function Footer() {
             <ul className="flex flex-wrap gap-4 text-xs">
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-500 transition hover:opacity-75 dark:text-gray-400"
                 >
                   Terms & Conditions
@@ -254,7 +254,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-500 transition hover:opacity-75 dark:text-gray-400"
                 >
                   Privacy Policy
@@ -263,7 +263,7 @@ function Footer() {
 
               <li>
                 <a
-                  href="#"
+                  href="/"
                   className="text-gray-500 transition hover:opacity-75 dark:text-gray-400"
                 >
                   Cookies
