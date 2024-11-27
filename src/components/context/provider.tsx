@@ -27,27 +27,50 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
+    const validateToken = async () => {
+      const token = localStorage.getItem("token");
+      const user = localStorage.getItem("user");
 
-    if (token && user) {
-      setAuthInfo({
-        isAuthenticated: true,
-        user: user,
-        hasFetched: true,
-      });
-    } else {
-      setAuthInfo({
-        isAuthenticated: false,
-        user: null,
-        hasFetched: true,
-      });
-    }
+      if (token && user) {
+        const [error, response] = await to(
+          axios.get(`${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/validate-token`, {
+            headers: {
+              Authorization: token,
+            },
+          })
+        );
+
+        if (error) {
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          setAuthInfo({
+            isAuthenticated: false,
+            user: null,
+            hasFetched: true,
+          });
+          return;
+        }
+
+        setAuthInfo({
+          isAuthenticated: true,
+          user: user,
+          hasFetched: true,
+        });
+      } else {
+        setAuthInfo({
+          isAuthenticated: false,
+          user: null,
+          hasFetched: true,
+        });
+      }
+    };
+
+    validateToken();
   }, []);
 
   async function signIn(email: string, password: string) {
     const [error, response] = await to(
-      axios.post(`${process.env.REACT_APP_ROBUST_API_BASE_URL}/login`, {
+      axios.post(`${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/login`, {
         email,
         password,
       })
