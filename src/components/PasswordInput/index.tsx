@@ -29,7 +29,7 @@ function PasswordInput(props: Props): JSX.Element {
     }
 
     return (
-        <div className={`${className} ${error ? "border-red-500" : validate ? "border-green-500" : inactive ? "border-gray-300" : "border-gray-300"} relative`}>
+        <div className="input-wrapper relative">
             <input
                 type={showPassword ? "text" : "password"}
                 autoComplete="off"
@@ -40,7 +40,7 @@ function PasswordInput(props: Props): JSX.Element {
                 value={value}
                 disabled={inactive}
             />
-            <p className="absolute right-2 top-2 cursor-pointer text-blue-500" onClick={() => !inactive && setShowPassword(!showPassword)}>
+            <p className="absolute right-4 top-5 cursor-pointer text-blue-500" onClick={() => !inactive && setShowPassword(!showPassword)}>
                 {!showPassword ? "Mostrar" : "Ocultar"}
             </p>
         </div>

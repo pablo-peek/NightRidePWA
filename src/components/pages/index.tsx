@@ -5,6 +5,7 @@ import AuthContextProvider from "../context/provider";
 import { ToastContainer } from "react-toastify";
 import Home from "./home";
 import Dashboard from "./dashboard";
+import Profile from "./profile";
 import Screen404 from "../404";
 import Login from "./login";
 import Register from "./register";
@@ -32,7 +33,9 @@ function Router(): JSX.Element {
         {authInfo?.isAuthenticated ? (
           <>
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<Navigate to="/dashboard" />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Navigate to="/" />} />
           </>
         ) : (
           <>

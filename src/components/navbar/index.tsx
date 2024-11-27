@@ -1,11 +1,14 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import AuthContext from '../context/index'
-import React from 'react'
 import logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
-import { useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContextType } from '../context/provider'
+import { Message, useToaster } from "rsuite"
+import Avatar from "boring-avatars";
+import to from "await-to-js"
+
 
 
 function classNames(...classes: string[]) {
@@ -15,20 +18,49 @@ function classNames(...classes: string[]) {
 function Navbar() {
   const { isAuthenticated } = useContext(AuthContext) as AuthContextType;
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const context: any = useContext(AuthContext);
+  const toaster = useToaster();
 
-  const navigation = [
-    { name: 'Dashboard', href: '#/Dashboard', current: true, navigate: () => navigate('/dashboard') },
-  ]
-  const navigationWithouthAuth = [
-    { name: 'Inicio', href: '#/', current: false, navigate: () => navigate('/') },
-  ]
+  const [navigation, setNavigation] = useState([
+    { name: 'Inicio', href: '#/', current: true, navigate: () => navigate('/'), show: true },
+    { name: 'Dashboard', href: '#/Dashboard', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
+    { name: 'Perfil', href: '#/profile', current: false, navigate: () => navigate('/profile'), show: false },
+    { name: 'Iniciar Sesión', href: '#/login', current: false, navigate: () => navigate('/login', { replace: isAuthenticated }), show: false },
+  ]);
 
-  const newNavigation = isAuthenticated ? navigation : navigationWithouthAuth;
+  useEffect(() => {
+    setNavigation((prev) =>
+      prev.map((item) => {
+        if (item.name === 'Dashboard') {
+          return { ...item, show: isAuthenticated };
+        }
+        return item;
+      })
+    );
+  }, [isAuthenticated]);
 
+  const handleNavigation = (name: string) => {
+    setNavigation((items) =>
+      items.map((item) => ({
+        ...item,
+        current: item.name === name,
+      }))
+    );
+  };
+
+  const newNavigation = navigation.filter((item) => item.show);
+
+  async function signOut(): Promise<any> {
+    try {
+      await to(context.signOut());
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
-    <Disclosure as="nav" className="bg-gray-800 sticky top-0 w z-50">
+    <Disclosure as="nav" className="bg-black top-0 w-full z-50 border-b border-gray-800 absolute">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -54,12 +86,13 @@ function Navbar() {
                     key={item.name}
                     href={item.href}
                     onClick={() => {
+                      handleNavigation(item.name);
                       item.navigate();
                     }}
                     aria-current={item.current ? 'page' : undefined}
                     className={classNames(
-                      item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium',
+                        item.current ? 'bg-white bg-opacity-40 text-white' : 'text-gray-300 hover:bg-white hover:bg-opacity-40 hover:text-white',
+                        'block rounded-md px-3 py-2 text-base font-medium',
                     )}
                   >
                     {item.name}
@@ -69,25 +102,16 @@ function Navbar() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="size-6" />
-            </button>
-
             {isAuthenticated ? (
             <Menu as="div" className="relative ml-3">
             <div>
               <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                 <span className="absolute -inset-1.5" />
-                <span className="sr-only">Open user menu</span>
-                <img
-                  alt=""
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  className="size-8 rounded-full"
+                <span className="sr-only">Menú de Usuario</span>
+                <Avatar
+                  size={40}
+                  name="Margaret"
+                  variant="marble"
                 />
               </MenuButton>
             </div>
@@ -97,29 +121,49 @@ function Navbar() {
             >
               <MenuItem>
                 <a
-                  href="#"
+                  href="#/profile"
+                  onClick={() => {
+                    handleNavigation('Perfil');
+                    navigate('/profile');
+                  }}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                 >
-                  Your Profile
+                  Perfil
                 </a>
               </MenuItem>
               <MenuItem>
                 <a
                   href="#"
+                  onClick={() => {
+                    signOut();
+                    // toaster.push(<Message type="success" message="Hasta luego" />)
+                  }}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                 >
-                  Sign out
+                  Cerrar Sesión
                 </a>
               </MenuItem>
             </MenuItems>
           </Menu>
             ) : (
-              <a
-                href="#/login"
-                className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-              >
-                Iniciar Sesión
-              </a>
+              // usar el array de navegacion para mostrar el boton de iniciar sesion, validar el current
+                <a
+                  href="#/login"
+                  onClick={() => {
+                    handleNavigation('Iniciar Sesión');
+                    navigate('/login', { replace: true });
+                  }}
+                  aria-current={navigation.find((item) => item.name === 'Iniciar Sesión')?.current ? 'page' : undefined}
+                  className={classNames(
+                    navigation.find((item) => item.name === 'Iniciar Sesión')?.current
+                      ? 'bg-white bg-opacity-40 text-white'
+                      : 'text-gray-300 hover:bg-white hover:bg-opacity-40 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium'
+                  )}
+                >
+                  Iniciar Sesión
+                </a>
+              
             )}
 
           </div>
@@ -135,8 +179,8 @@ function Navbar() {
               href={item.href}
               aria-current={item.current ? 'page' : undefined}
               className={classNames(
-                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                'block rounded-md px-3 py-2 text-base font-medium',
+                  item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white hover:bg-opacity-40 hover:text-white',
+                  'block rounded-md px-3 py-2 text-base font-medium',
               )}
             >
               {item.name}
