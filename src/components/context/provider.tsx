@@ -33,11 +33,15 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       if (token && user) {
         const [error, response] = await to(
-          axios.post(`${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/validate-token`, {
-            headers: {
-              Authorization: token,
-            },
-          })
+          axios.post(
+            `${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/validate-token`,
+            {},
+            {
+              headers: {
+                Authorization: token, 
+              },
+            }
+          )
         );
 
         if (error) {
