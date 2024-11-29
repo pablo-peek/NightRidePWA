@@ -5,8 +5,9 @@ import logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContextType } from '../context/provider'
-import { Message, useToaster } from "rsuite"
+import { useToaster } from "rsuite"
 import Avatar from "boring-avatars";
+import { useGetUserProfile } from '../../query/userQuery'
 import to from "await-to-js"
 
 
@@ -16,14 +17,15 @@ function classNames(...classes: string[]) {
 
 function Navbar() {
   const { isAuthenticated } = useContext(AuthContext) as AuthContextType;
+  const { user } = useGetUserProfile(isAuthenticated);
+
 
   const navigate = useNavigate();
   const context: any = useContext(AuthContext);
-  const toaster = useToaster();
 
   const [navigation, setNavigation] = useState([
     { name: 'Inicio', href: '#/', current: true, navigate: () => navigate('/'), show: true },
-    { name: 'Dashboard', href: '#/dashboard', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
+    { name: 'Dashboard', href: '#/dashboard/race-one', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
     { name: 'Perfil', href: '#/profile', current: false, navigate: () => navigate('/profile'), show: false },
     { name: 'Iniciar Sesión', href: '#/login', current: false, navigate: () => navigate('/login', { replace: isAuthenticated }), show: false },
   ]);
@@ -109,8 +111,8 @@ function Navbar() {
                 <span className="sr-only">Menú de Usuario</span>
                 <Avatar
                   size={40}
-                  name="Margaret"
-                  variant="marble"
+                  name={user?.data?.avatar}
+                  variant={user?.data?.variant}
                 />
               </MenuButton>
             </div>

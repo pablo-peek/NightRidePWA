@@ -4,7 +4,6 @@ import {
     QueryClient,
     QueryClientProvider,
   } from '@tanstack/react-query'
-  import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import './index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
@@ -46,7 +45,6 @@ root.render(
           <CustomProvider locale={es_ES}>
             <Router />
             </CustomProvider>
-            <ReactQueryDevtools />
         </QueryClientProvider>
     </ErrorBoundary>
   </React.StrictMode>

@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import cardTop from "../../img/downloadCard.png";
 import Avatar from "boring-avatars";
+import {useGetUserProfile, useUpdateUserProfile} from "../../query/userQuery";
+import Loader from "../../components/Loader";
 
 function Profile(): JSX.Element {
     const [isModalOpen, setModalOpen] = useState(false);
+    const updateUserProfile = useUpdateUserProfile();
+    const { user, isFetching: isFetchingUser } = useGetUserProfile();
 
-    const changeAvatar = (name: string, variant: string) => {
-        console.log(`Cambiando avatar a: ${name}`);
-        console.log(`Con la variante: ${variant}`);
-        setModalOpen(false); // Cerrar el modal después de la selección
+    if(isFetchingUser) {
+        return <Loader visible={isFetchingUser} />;
+    }
+
+    const changeAvatar = async (name: string, variant: string) => {
+        try {
+            await updateUserProfile({ avatar: name, variant: variant });
+            setModalOpen(false);
+            window.location.reload();
+        } catch (error) {
+            console.error('Error updating profile:', error);
+        }
     };
 
     const openModal = () => {
@@ -17,6 +29,7 @@ function Profile(): JSX.Element {
 
     const closeModal = () => {
         setModalOpen(false);
+        return <Loader visible={!isModalOpen} />;
     };
 
     return (
@@ -30,12 +43,12 @@ function Profile(): JSX.Element {
                     <div className="p-6">
                         <div className="flex lg:gap-0 gap-6 flex-wrap justify-between items-center">
                             <div className="flex items-center gap-3">
-                                <Avatar size={60} name="Margaret" variant="marble" />
+                                <Avatar size={60} name={user?.data.avatar} variant={user?.data.variant}/>
                                 <div>
                                     <h6 className="text-blue-gray-900 font-semibold">
-                                        javr-matrix
+                                        {user?.data?.username}
                                     </h6>
-                                    <p className="text-sm text-gray-500">Javr.brens@gmail.com</p>
+                                    <p className="text-sm text-gray-500"> {user?.data?.email}</p>
                                 </div>
                             </div>
                             <div className="flex flex-wrap items-center gap-2">
