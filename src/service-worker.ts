@@ -50,10 +50,14 @@ var urlsToCache = [
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NIGHTRIDE).then(cache => {
-      return cache.addAll(urlsToCache);
+      return cache.addAll(urlsToCache)
+        .catch(error => {
+          console.error('Error al agregar a la caché:', error);
+        });
     })
   );
 });
+
 
 self.addEventListener('activate', e => {
   const cacheWhiteList = [CACHE_NIGHTRIDE];
