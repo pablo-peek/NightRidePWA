@@ -36,7 +36,8 @@ function Home(): JSX.Element {
     const downloadAPK = (platform: string) => {
         let fileUrl = "";
         if (platform === "windows") {
-            fileUrl = "/game/windows/NightRide-setup.exe";
+            // fileUrl = "/game/windows/NightRide-setup.exe";
+            toast.warning("La versión para Windows estará disponible próximamente.");
         } else if (platform === "macSilicon") {
             // fileUrl = "/game/macSilicon/NightRideMacV1.zip";
             toast.warning("La versión para Apple Silicon estará disponible próximamente.");
