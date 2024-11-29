@@ -12,7 +12,8 @@ import ErrorBoundary from "./components/error-boundary"
 import { CustomProvider } from "rsuite"
 import es_ES from 'rsuite/locales/es_ES';
 import { AxiosError } from "axios"
-import { toast } from "react-toastify"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Router from './pages';
 
 const queryClient = new QueryClient({
@@ -44,6 +45,12 @@ root.render(
         <QueryClientProvider client={queryClient}>
           <CustomProvider locale={es_ES}>
             <Router />
+            <ToastContainer 
+              position="top-center"
+              hideProgressBar={true}
+              limit={3}
+              autoClose={3000}
+            />
             </CustomProvider>
         </QueryClientProvider>
     </ErrorBoundary>

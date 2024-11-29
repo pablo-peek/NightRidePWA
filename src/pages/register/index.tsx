@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import AuthContext from "../../components/context";
-import { Message, useToaster } from "rsuite";
+import { toast } from "react-toastify";
 import to from "await-to-js";
 import downloadCard from "../../img/downloadCard.png";
 import tipography from "../../img/tipography.png";
@@ -30,16 +30,6 @@ function Register(): JSX.Element {
   const [passwordMismatch, setPasswordMismatch] = useState<boolean>(false);
 
   const context: any = useContext(AuthContext);
-  const toaster = useToaster();
-
-  const customToastMessage = (message: string) => {
-    const customMessage = (
-      <Message showIcon type={"error"} closable>
-        {message}
-      </Message>
-    );
-    return customMessage;
-  };
 
   async function onSubmit(): Promise<any> {
     const { username, email, password, passwordConfirm } = getValues();
@@ -56,23 +46,13 @@ function Register(): JSX.Element {
       if (error) throw error;
 
       if (!user) {
-        console.log(user);
-        toaster.push(
-          customToastMessage(
-            "Ocurrió un error al registrarse, intente más tarde"
-          ),
-          { placement: "topCenter", duration: 5000 }
-        );
+        toast.error("Ocurrió un error al registrarse, intentelo más tarde");
         return;
       }
+      toast.success("¡Registro exitoso, bienvenido!");
     } catch (error) {
-      console.log(error);
-      toaster.push(
-        customToastMessage(
-          "Ocurrió un error al registrarse, intente más tarde"
-        ),
-        { placement: "topCenter", duration: 5000 }
-      );
+      console.error(error);
+      toast.error("Hubo un problema, inténtalo de nuevo");
     } finally {
       setLoad(false);
     }

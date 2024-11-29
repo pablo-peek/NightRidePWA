@@ -3,6 +3,7 @@ import cardTop from "../../img/downloadCard.png";
 import Avatar from "boring-avatars";
 import {useGetUserProfile, useUpdateUserProfile} from "../../query/userQuery";
 import Loader from "../../components/Loader";
+import { toast } from "react-toastify";
 
 function Profile(): JSX.Element {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -159,7 +160,7 @@ function Profile(): JSX.Element {
                         </div>
                         <button
                             onClick={closeModal}
-                            className="mt-6 w-full py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-700 duration-300"
+                            className="px-6 py-3 border border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-green-300 text-center w-full mt-6"
                         >
                             Cancelar
                         </button>

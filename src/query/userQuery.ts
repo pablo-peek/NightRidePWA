@@ -16,7 +16,7 @@ function useGetUserProfile(isAuthenticated = false) {
     });
 
     if (error) {
-        toast.error('Ocurrió un error al obtener el perfil');
+        toast.error('Ocurrió un error al obtener la información del perfil.');
     }
 
     return {
@@ -34,7 +34,7 @@ function useUpdateUserProfile() {
             queryClient.setQueryData(['raceTime', avatar, variant], response);
             return response;
         } catch (error) {
-            toast.error('Ocurrió un error al actualizar el perfil');
+            toast.error('Ocurrió un error al actualizar el avatar.');
             throw error;
         }
     };

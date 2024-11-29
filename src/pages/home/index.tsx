@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import heroImage from "../../img/hero.png";
 import historyImage from "../../img/history.png";
 import tipography from "../../img/tipography.png";
@@ -11,9 +12,44 @@ import featureFour from "../../img/feature_4.png";
 import flutterSection from "../../img/flutterSection.png";
 import welcome from "../../img/welcome.png";
 import FadeInSection from '../../components/FadeInSection';
+import Apple from "../../img/apple.png";
+import Windows from "../../img/windows.png";
 
 
 function Home(): JSX.Element {
+
+    // Estado para controlar la visibilidad del modal
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Función para abrir el modal
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    // Función para cerrar el modal
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
+    const downloadAPK = (platform: string) => {
+        let fileUrl = "";
+        if (platform === "windows") {
+            fileUrl = "/game/windows/logo-384x384.png";
+        } else if (platform === "macSilicon") {
+            fileUrl = "/game/macSilicon/logo-384x384.png";
+        }
+
+        // Crear enlace y simular clic para iniciar descarga
+        const link = document.createElement("a");
+        link.href = fileUrl;
+        link.download = platform === "windows" ? "NightRide-Windows.png" : "NightRide-Mac.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Cerrar modal después de la descarga
+        closeModal();
+    };
 
     const scrollToDownload = () => {
         const downloadSection = document.getElementById("download-section");
@@ -25,11 +61,6 @@ function Home(): JSX.Element {
     const goToYoutube = () => {
         window.open(process.env.REACT_APP_ROBUST_YOUTUBE_BASE_URL, "_blank");
     };
-
-    const downloadAPK = () => {
-        // window.open("https://drive.google.com/uc?export=download&id=1g7GzrZl9l9VJ0c3Jv2k0tZuH8r5CJv3N", "_blank");
-        console.log("Descargando APK...");
-    }
 
     const downloadFlutterApp = () => {
         console.log("Descargando Flutter...");
@@ -276,7 +307,7 @@ function Home(): JSX.Element {
                                     ¡Hazte con el juego más emocionante de carreras urbanas! ¡Descarga ahora y vive la adrenalina!
                                 </p>
                                 <button
-                                    onClick={downloadAPK}
+                                    onClick={openModal}
                                     className="w-full px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-green-300"
                                 >
                                     Descargar
@@ -308,6 +339,39 @@ function Home(): JSX.Element {
             <footer className="py-6 bg-black text-center">
                 <p className="text-gray-400">© {new Date().getFullYear()} NightRide. Todos los derechos reservados.</p>
             </footer>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-neutral-900 p-8 rounded-2xl w-96">
+                        <h3 className="text-xl font-bold text-white mb-4">Elige tu plataforma</h3>
+                        <div className="flex space-x-4">
+                            <div
+                                className="w-1/2 p-4 py-4 rounded-lg text-center cursor-pointer border border-gray-700 bg-black hover:bg-opacity-50 hover:bg-gray-900"
+                                onClick={() => downloadAPK("windows")} style={{ backgroundImage: `url(${Windows})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+                            >
+                                <h4 className="text-white font-semibold mb-2 pt-24">Windows</h4>
+                            </div>
+                            <div
+                                className="w-1/2 p-4 py-4 rounded-lg text-center cursor-pointer border border-gray-700 bg-black hover:bg-opacity-50 hover:bg-gray-900"
+                                onClick={() => downloadAPK("macSilicon")} style={{ backgroundImage: `url(${Apple})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+                            >
+                                <h4 className="text-white font-semibold mb-2 pt-24">Apple Silicon</h4>
+                            </div>
+                        </div>
+                        {/* Botón para cerrar el modal */}
+                        <div className="mt-6 text-center">
+                            <button
+                                onClick={closeModal}
+                                className="px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-red-300"
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </div>
     );
 }
