@@ -96,7 +96,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       hasFetched: true,
     });
 
-    window.location.href = "#/dashboard";
+    window.location.href = "#/dashboard/race-one";
+    window.location.reload();
     return response.data.data.username;
   }
 
