@@ -14,7 +14,7 @@ import { CustomProvider } from "rsuite"
 import es_ES from 'rsuite/locales/es_ES';
 import { AxiosError } from "axios"
 import { toast } from "react-toastify"
-import Router from './components/pages';
+import Router from './pages';
 
 const queryClient = new QueryClient({
   defaultOptions: {

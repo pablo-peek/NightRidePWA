@@ -1,16 +1,17 @@
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../context";
-import AuthContextProvider from "../context/provider";
+import AuthContext from "../components/context";
+import AuthContextProvider from "../components/context/provider";
 import { ToastContainer } from "react-toastify";
 import Home from "./home";
-import Dashboard from "./dashboard";
+import DashboardRaceOne from "./dashboardraceone";
+import DashboardRaceTwo from "./dashboardracetwo";
 import Profile from "./profile";
-import Screen404 from "../404";
+import Screen404 from "../components/404";
 import Login from "./login";
 import Register from "./register";
-import Navbar from "../navbar";
-import Loader1 from "../Loader";
+import Navbar from "../components/navbar";
+import Loader1 from "../components/Loader";
 
 function Router(): JSX.Element {
   const authInfo = useContext(AuthContext);
@@ -32,7 +33,8 @@ function Router(): JSX.Element {
       <Routes>
         {authInfo?.isAuthenticated ? (
           <>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/race-one" element={<DashboardRaceOne />} />
+            <Route path="/dashboard/race-two" element={<DashboardRaceTwo />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/" element={<Home />} />
             <Route path="*" element={<Navigate to="/" />} />

@@ -10,7 +10,6 @@ import Avatar from "boring-avatars";
 import to from "await-to-js"
 
 
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
@@ -24,7 +23,7 @@ function Navbar() {
 
   const [navigation, setNavigation] = useState([
     { name: 'Inicio', href: '#/', current: true, navigate: () => navigate('/'), show: true },
-    { name: 'Dashboard', href: '#/Dashboard', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
+    { name: 'Dashboard', href: '#/dashboard/race-one', current: false, navigate: () => navigate('/dashboard/race-one'), show: isAuthenticated },
     { name: 'Perfil', href: '#/profile', current: false, navigate: () => navigate('/profile'), show: false },
     { name: 'Iniciar Sesión', href: '#/login', current: false, navigate: () => navigate('/login', { replace: isAuthenticated }), show: false },
   ]);
@@ -32,7 +31,7 @@ function Navbar() {
   useEffect(() => {
     setNavigation((prev) =>
       prev.map((item) => {
-        if (item.name === 'Dashboard') {
+        if (item.name === 'dashboard') {
           return { ...item, show: isAuthenticated };
         }
         return item;

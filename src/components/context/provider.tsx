@@ -12,6 +12,7 @@ interface userData {
 
 export interface AuthContextType extends userData {
   signIn: (email: string, password: string) => void;
+  register: (usernameForm: string, email: string, password: string) => void;
   signOut: () => void;
 }
 
@@ -99,6 +100,34 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return response.data.data.username;
   }
 
+  async function register(usernameForm: string, email: string, password: string) {
+    const [error, response] = await to(
+      axios.post(`${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/register`, {
+        username: usernameForm,
+        email,
+        password,
+      })
+    );
+
+    if (error) {
+      toast.warn(error.message);
+      return;
+    }
+
+    const { username, token } = response.data.data;
+    localStorage.setItem("user", username);
+    localStorage.setItem("token", token);
+
+    setAuthInfo({
+      isAuthenticated: true,
+      user: username,
+      hasFetched: true,
+    });
+
+    window.location.href = "#/dashboard";
+    return response.data.data.username;
+  }
+
   async function signOut() {
     try {
       localStorage.removeItem("user");
@@ -119,6 +148,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       value={{
         ...authInfo,
         signIn,
+        register,
         signOut,
       }}
     >
