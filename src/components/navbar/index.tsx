@@ -23,7 +23,7 @@ function Navbar() {
 
   const [navigation, setNavigation] = useState([
     { name: 'Inicio', href: '#/', current: true, navigate: () => navigate('/'), show: true },
-    { name: 'Dashboard', href: '#/dashboard/race-one', current: false, navigate: () => navigate('/dashboard/race-one'), show: isAuthenticated },
+    { name: 'Dashboard', href: '#/dashboard', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
     { name: 'Perfil', href: '#/profile', current: false, navigate: () => navigate('/profile'), show: false },
     { name: 'Iniciar Sesión', href: '#/login', current: false, navigate: () => navigate('/login', { replace: isAuthenticated }), show: false },
   ]);
@@ -31,7 +31,7 @@ function Navbar() {
   useEffect(() => {
     setNavigation((prev) =>
       prev.map((item) => {
-        if (item.name === 'dashboard') {
+        if (item.name === 'Dashboard') {
           return { ...item, show: isAuthenticated };
         }
         return item;
@@ -131,7 +131,7 @@ function Navbar() {
                 </a>
               </MenuItem>
               <MenuItem>
-                <button
+                <a
                   onClick={() => {
                     signOut();
                     // toaster.push(<Message type="success" message="Hasta luego" />)
@@ -139,7 +139,7 @@ function Navbar() {
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                 >
                   Cerrar Sesión
-                </button>
+                </a>
               </MenuItem>
             </MenuItems>
           </Menu>
