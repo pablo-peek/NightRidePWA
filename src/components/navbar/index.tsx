@@ -25,7 +25,7 @@ function Navbar() {
 
   const [navigation, setNavigation] = useState([
     { name: 'Inicio', href: '#/', current: true, navigate: () => navigate('/'), show: true },
-    { name: 'Dashboard', href: '#/dashboard/race-one', current: false, navigate: () => navigate('/dashboard'), show: isAuthenticated },
+    { name: 'Dashboard', href: '#/dashboard/race-one', current: false, navigate: () => navigate('/dashboard/race-one'), show: isAuthenticated },
     { name: 'Perfil', href: '#/profile', current: false, navigate: () => navigate('/profile'), show: false },
     { name: 'Iniciar Sesión', href: '#/login', current: false, navigate: () => navigate('/login', { replace: isAuthenticated }), show: false },
   ]);
@@ -172,7 +172,7 @@ function Navbar() {
 
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
-          {navigation.map((item) => (
+          {newNavigation.map((item) => (
             <DisclosureButton
               key={item.name}
               as="a"

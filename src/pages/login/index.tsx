@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import AuthContext from "../../components/context";
 import { Message, useToaster } from "rsuite";
+import { ToastContainer, toast } from 'react-toastify';
+
 import to from "await-to-js";
 import downloadCard from "../../img/downloadCard.png";
 import tipography from "../../img/tipography.png";
@@ -29,16 +31,6 @@ function Login(): JSX.Element {
   const [error, setError] = useState<boolean>(false);
 
   const context: any = useContext(AuthContext);
-  const toaster = useToaster();
-
-  const customToastMessage = (message: string) => {
-    const customMessage = (
-      <Message showIcon type={"error"} closable>
-        {message}
-      </Message>
-    );
-    return customMessage;
-  };
 
   async function onSubmit(): Promise<any> {
     const { email, password } = getValues();
@@ -50,23 +42,13 @@ function Login(): JSX.Element {
       if (error) throw error;
 
       if (!user) {
-        console.log(user);
-        toaster.push(
-          customToastMessage(
-            "Ocurrió un error al iniciar sesión, intente más tarde"
-          ),
-          { placement: "topCenter", duration: 5000 }
-        );
+        toast.error("Ocurrió un error al iniciar sesión, intentelo más tarde");
         return;
       }
+      toast.success("¡Inicio de sesión exitoso, bienvenido!");
     } catch (error) {
       console.log(error);
-      toaster.push(
-        customToastMessage(
-          "Ocurrió un error al iniciar sesión, intente más tarde"
-        ),
-        { placement: "topCenter", duration: 5000 }
-      );
+      toast.error("Hubo un problema, inténtalo de nuevo");
     } finally {
       setLoad(false);
     }
