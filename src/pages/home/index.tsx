@@ -14,21 +14,18 @@ import welcome from "../../img/welcome.png";
 import FadeInSection from '../../components/FadeInSection';
 import Apple from "../../img/apple.png";
 import Windows from "../../img/windows.png";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 
 
 function Home(): JSX.Element {
 
-    // Estado para controlar la visibilidad del modal
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Función para abrir el modal
     const openModal = () => {
         setIsModalOpen(true);
     };
 
-    // Función para cerrar el modal
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -36,15 +33,13 @@ function Home(): JSX.Element {
     const downloadAPK = (platform: string) => {
         let fileUrl = "";
         if (platform === "windows") {
-            // fileUrl = "/game/windows/NightRide-setup.exe";
             toast.warning("La versión para Windows estará disponible próximamente.");
         } else if (platform === "macSilicon") {
-            // fileUrl = "/game/macSilicon/NightRideMacV1.zip";
             toast.warning("La versión para Apple Silicon estará disponible próximamente.");
             return;
         }
 
-        // Crear enlace y simular clic para iniciar descarga
+
         const link = document.createElement("a");
         link.href = fileUrl;
         link.download = platform === "windows" ? "NightRide-setup.exe" : "NightRideMacV1.zip";
@@ -52,7 +47,6 @@ function Home(): JSX.Element {
         link.click();
         document.body.removeChild(link);
 
-        // Cerrar modal después de la descarga
         closeModal();
     };
 
