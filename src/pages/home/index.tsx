@@ -33,19 +33,12 @@ function Home(): JSX.Element {
     const downloadAPK = (platform: string) => {
         let fileUrl = "";
         if (platform === "windows") {
-            toast.warning("La versión para Windows estará disponible próximamente.");
+            fileUrl = "https://drive.google.com/file/d/1nJhcFbmIWybIKfCE4aTtIooUdO8M7Zmp/view?usp=drive_link";
+            window.open(fileUrl, "_blank");
         } else if (platform === "macSilicon") {
             toast.warning("La versión para Apple Silicon estará disponible próximamente.");
             return;
         }
-
-
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = platform === "windows" ? "NightRide-setup.exe" : "NightRideMacV1.zip";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
 
         closeModal();
     };
