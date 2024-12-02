@@ -14,21 +14,20 @@ import welcome from "../../img/welcome.png";
 import FadeInSection from '../../components/FadeInSection';
 import Apple from "../../img/apple.png";
 import Windows from "../../img/windows.png";
-import { ToastContainer, toast } from 'react-toastify';
+import Android from "../../img/android.png";
+import { toast } from 'react-toastify';
 
 
 
 function Home(): JSX.Element {
 
-    // Estado para controlar la visibilidad del modal
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isFlutterModalOpen, setIsModalOpenFlutter] = useState(false);
 
-    // Función para abrir el modal
     const openModal = () => {
         setIsModalOpen(true);
     };
 
-    // Función para cerrar el modal
     const closeModal = () => {
         setIsModalOpen(false);
     };
@@ -36,24 +35,36 @@ function Home(): JSX.Element {
     const downloadAPK = (platform: string) => {
         let fileUrl = "";
         if (platform === "windows") {
-            // fileUrl = "/game/windows/NightRide-setup.exe";
-            toast.warning("La versión para Windows estará disponible próximamente.");
+            fileUrl = "https://drive.google.com/file/d/1nJhcFbmIWybIKfCE4aTtIooUdO8M7Zmp/view?usp=drive_link";
+            window.open(fileUrl, "_blank");
         } else if (platform === "macSilicon") {
-            // fileUrl = "/game/macSilicon/NightRideMacV1.zip";
             toast.warning("La versión para Apple Silicon estará disponible próximamente.");
             return;
         }
 
-        // Crear enlace y simular clic para iniciar descarga
-        const link = document.createElement("a");
-        link.href = fileUrl;
-        link.download = platform === "windows" ? "NightRide-setup.exe" : "NightRideMacV1.zip";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-
-        // Cerrar modal después de la descarga
         closeModal();
+    };
+
+    const openFlutterModal = () => {
+        setIsModalOpenFlutter(true);
+    };
+
+    const closeFlutterModal = () => {
+        setIsModalOpenFlutter(false);
+    };
+
+    const downloadFlutter = (platform: string) => {
+        let fileUrl = "";
+        if (platform === "android") {
+            fileUrl = "https://drive.google.com/drive/folders/1nX7IZv_2S6CbOHG2SFu0m4fuqwb75jkK?usp=drive_link";
+            window.open(fileUrl, "_blank");
+        } else if (platform === "apple") {
+            fileUrl = "https://www.apple.com/mx/app-store/";
+            window.open(fileUrl, "_blank");
+            return;
+        }
+
+        closeFlutterModal();
     };
 
     const scrollToDownload = () => {
@@ -66,10 +77,6 @@ function Home(): JSX.Element {
     const goToYoutube = () => {
         window.open(process.env.REACT_APP_ROBUST_YOUTUBE_BASE_URL, "_blank");
     };
-
-    const downloadFlutterApp = () => {
-        console.log("Descargando Flutter...");
-    }
 
     return (
         <div className="bg-black text-white">
@@ -185,7 +192,7 @@ function Home(): JSX.Element {
                         </ul>
                         <div className="mt-8 text-center">
                                                         <button 
-                                onClick={downloadFlutterApp}
+                                onClick={openFlutterModal}
                                 className="px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-green-300 animate-bounce"
                             >
                                 Descargar Aplicación Móvil
@@ -368,6 +375,38 @@ function Home(): JSX.Element {
                         <div className="mt-6 text-center">
                             <button
                                 onClick={closeModal}
+                                className="px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-red-300"
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Flutter Modal */}
+            {isFlutterModalOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+                    <div className="bg-neutral-900 p-8 rounded-2xl w-96">
+                        <h3 className="text-xl font-bold text-white mb-4">Elige tu plataforma</h3>
+                        <div className="flex space-x-4">
+                            <div
+                                className="w-1/2 p-4 py-4 rounded-lg text-center cursor-pointer border border-gray-700 bg-black hover:bg-opacity-50 hover:bg-gray-900"
+                                onClick={() => downloadFlutter("android")} style={{ backgroundImage: `url(${Android})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+                            >
+                                <h4 className="text-white font-semibold mb-2 pt-24">Android</h4>
+                            </div>
+                            <div
+                                className="w-1/2 p-4 py-4 rounded-lg text-center cursor-pointer border border-gray-700 bg-black hover:bg-opacity-50 hover:bg-gray-900"
+                                onClick={() => downloadFlutter("apple")} style={{ backgroundImage: `url(${Apple})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+                            >
+                                <h4 className="text-white font-semibold mb-2 pt-24">Apple</h4>
+                            </div>
+                        </div>
+                        {/* Botón para cerrar el modal */}
+                        <div className="mt-6 text-center">
+                            <button
+                                onClick={closeFlutterModal}
                                 className="px-6 py-3 border-2 border-white text-white font-medium text-lg rounded-lg hover:bg-white hover:text-gray-900 duration-300 focus:ring focus:ring-red-300"
                             >
                                 Cerrar
