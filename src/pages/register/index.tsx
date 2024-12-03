@@ -19,7 +19,6 @@ function Register(): JSX.Element {
     handleSubmit,
     formState: { errors },
     getValues,
-    reset,
     watch,
   } = useForm<typeof registerDTO>({ defaultValues: registerDTO });
 

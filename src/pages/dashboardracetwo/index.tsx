@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import getUserTime from "../../query/raceQuery";
 import Loader from "../../components/Loader";
 import { Link } from 'react-router-dom';
@@ -12,8 +12,6 @@ function DashboardRaceTwo(): JSX.Element {
   if (isFetchingStats) {
     return <Loader visible={isFetchingStats} />;
   }
-
-  const totalPages = Math.ceil(racesTime.total / limit);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900 mt-16">
