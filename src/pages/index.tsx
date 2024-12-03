@@ -11,7 +11,7 @@ import Screen404 from "../components/404";
 import Login from "./login";
 import Register from "./register";
 import Navbar from "../components/navbar";
-import Loader1 from "../components/Loader";
+import Loader from "../components/Loader";
 
 function Router(): JSX.Element {
   const authInfo = useContext(AuthContext);
@@ -24,7 +24,7 @@ function Router(): JSX.Element {
   }, [authInfo]);
 
   if (loading) {
-    return <Loader1 visible={true} />;
+    return <Loader visible={true} />;
   }
 
   return (
@@ -50,11 +50,11 @@ function Router(): JSX.Element {
         )}
       </Routes>
       <ToastContainer 
-              position="top-center"
-              hideProgressBar={true}
-              limit={3}
-              autoClose={3000}
-            />
+        position="top-center"
+        hideProgressBar={true}
+        limit={3}
+        autoClose={3000}
+      />
     </HashRouter>
   );
 }

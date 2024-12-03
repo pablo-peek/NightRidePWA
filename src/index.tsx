@@ -12,7 +12,7 @@ import ErrorBoundary from "./components/error-boundary"
 import { CustomProvider } from "rsuite"
 import es_ES from 'rsuite/locales/es_ES';
 import { AxiosError } from "axios"
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from './pages';
 

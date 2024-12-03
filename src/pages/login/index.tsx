@@ -1,8 +1,7 @@
 import { useContext, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import AuthContext from "../../components/context";
-import { Message, useToaster } from "rsuite";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 import to from "await-to-js";
 import downloadCard from "../../img/downloadCard.png";
@@ -21,7 +20,6 @@ function Login(): JSX.Element {
     handleSubmit,
     formState: { errors },
     getValues,
-    reset,
     watch,
   } = useForm<typeof loginDTO>({ defaultValues: loginDTO });
 

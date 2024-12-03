@@ -3,7 +3,6 @@ import cardTop from "../../img/downloadCard.png";
 import Avatar from "boring-avatars";
 import {useGetUserProfile, useUpdateUserProfile} from "../../query/userQuery";
 import Loader from "../../components/Loader";
-import { toast } from "react-toastify";
 
 function Profile(): JSX.Element {
     const [isModalOpen, setModalOpen] = useState(false);

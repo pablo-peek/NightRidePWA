@@ -2,7 +2,6 @@ import AuthContext from "./index";
 import { to } from "await-to-js";
 import axios from "axios";
 import { ReactNode, useEffect, useState } from "react";
-import { toast } from "react-toastify";
 
 interface userData {
   isAuthenticated: boolean;
@@ -33,7 +32,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const user = localStorage.getItem("user");
 
       if (token && user) {
-        const [error, response] = await to(
+        const [error] = await to(
           axios.post(
             `${process.env.REACT_APP_ROBUST_API_BASE_URL}/auth/validate-token`,
             {},
