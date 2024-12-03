@@ -1,11 +1,10 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import AuthContext from '../context/index'
 import logo from '../../img/logo.png'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useContext, useEffect } from 'react';
 import { AuthContextType } from '../context/provider'
-import { useToaster } from "rsuite"
 import Avatar from "boring-avatars";
 import { useGetUserProfile } from '../../query/userQuery'
 import to from "await-to-js"
@@ -136,7 +135,6 @@ function Navbar() {
                 <a
                   onClick={() => {
                     signOut();
-                    // toaster.push(<Message type="success" message="Hasta luego" />)
                   }}
                   className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100 data-[focus]:outline-none"
                 >
@@ -146,7 +144,6 @@ function Navbar() {
             </MenuItems>
           </Menu>
             ) : (
-              // usar el array de navegacion para mostrar el boton de iniciar sesion, validar el current
                 <a
                   href="#/login"
                   onClick={() => {

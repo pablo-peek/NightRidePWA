@@ -18,7 +18,6 @@ import Android from "../../img/android.png";
 import { toast } from 'react-toastify';
 
 
-
 function Home(): JSX.Element {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -113,7 +112,6 @@ function Home(): JSX.Element {
                 </div>
             </section>
 
-            {/* History Section */}
             <section
                 className="flex items-center min-h-screen px-6 bg-cover text-left bg-center"
                 style={{ backgroundImage: `url(${historyImage})` }}
@@ -371,7 +369,6 @@ function Home(): JSX.Element {
                                 <h4 className="text-white font-semibold mb-2 pt-24">Apple Silicon</h4>
                             </div>
                         </div>
-                        {/* Botón para cerrar el modal */}
                         <div className="mt-6 text-center">
                             <button
                                 onClick={closeModal}

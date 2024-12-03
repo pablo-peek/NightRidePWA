@@ -49,20 +49,12 @@ function Router(): JSX.Element {
           </>
         )}
       </Routes>
-      <ToastContainer
-        containerId={"globalToast"}
-        position="top-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        limit={1}
-        theme="light"
-      />
+      <ToastContainer 
+              position="top-center"
+              hideProgressBar={true}
+              limit={3}
+              autoClose={3000}
+            />
     </HashRouter>
   );
 }
