@@ -45,12 +45,6 @@ root.render(
         <QueryClientProvider client={queryClient}>
           <CustomProvider locale={es_ES}>
             <Router />
-            <ToastContainer 
-              position="top-center"
-              hideProgressBar={true}
-              limit={3}
-              autoClose={3000}
-            />
             </CustomProvider>
         </QueryClientProvider>
     </ErrorBoundary>

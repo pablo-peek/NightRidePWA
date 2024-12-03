@@ -13,11 +13,9 @@ function DashboardRaceOne(): JSX.Element {
     return <Loader visible={isFetchingStats} />;
   }
 
-  const totalPages = Math.max(1, Math.ceil(racesTime.total / limit));
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-gray-900 mt-16">
-      <h1 className="text-3xl font-bold mb-6 text-white">Carrera 1</h1>
+      <h1 className="text-3xl font-bold mb-6 text-white">Carrera 1 </h1>
       <table className="min-w-full bg-gray-800 border border-gray-700 mb-6 text-white">
         <thead>
           <tr>

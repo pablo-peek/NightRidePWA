@@ -82,7 +82,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     );
 
     if (error) {
-      // toast.warn(error.message);
+      console.error(error);
       return;
     }
 
@@ -111,7 +111,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     );
 
     if (error) {
-      // toast.warn(error.message);
+      console.error(error);
       return;
     }
 
@@ -140,7 +140,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       });
       window.location.href = "/";
     } catch (error) {
-      // toast.warn("Error al cerrar sesión, intenta nuevamente.");
+      console.error(error);
     }
   }
 
